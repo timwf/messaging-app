@@ -3,14 +3,24 @@ import './App.css';
 import Header from "./components/Header";
 import Messages from "./components/Messages";
 import InputField from "./components/InputField";
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+
+const useStyles = makeStyles({
+
+
+});
+
 
 function App() {
+    const classes = useStyles();
   return (
     <div className="App">
-      <h1>APP</h1>
-      <Header />
-      <Messages />
-      <InputField />
+
+            <Header />
+            <Messages />
+            <InputField />
+
     </div>
   );
 }

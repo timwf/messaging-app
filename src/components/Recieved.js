@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Recieved extends Component {
 
-  render() {
+function Recieved() {
+    
     return (
       <div>
       <p>Recieved</p>
       </div>
     );
-  }
-
 }
+
+
 
 export default Recieved;

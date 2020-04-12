@@ -1,5 +1,15 @@
+html, body, h1, h2{
+    margin: 0;
+    padding: 0;
+}
+
 .App {
-  text-align: center;
+    position: relative;
+    max-width: 430px;
+  margin: auto;
+  font-family: Roboto;
+  background-color: #d5d5d5;
+  height: 100vh;
 }
 
 .App-logo {
