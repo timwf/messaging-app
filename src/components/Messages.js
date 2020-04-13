@@ -7,12 +7,17 @@ import ListItem from '@material-ui/core/ListItem';
 import InboxIcon from '@material-ui/icons/Inbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import {ctx} from '../store'
+import '../App.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
+  },
+  MuiListPadding: {
+      padding: "0px"
   },
   item: {
       backgroundColor: "#ac7878",
@@ -40,15 +45,17 @@ const useStyles = makeStyles((theme) => ({
 
 function Messages(){
     const classes = useStyles();
+
+    const[store] = React.useContext(ctx);
+    console.log(store);
     return (
-      <div>
+      <div className="messages-cont">
         <List>
-            {
-                ["Hi Mother Fucker", "Yeah"].map(item => (
-                    <div>
-                        <p className={classes.user}> user</p>
-                        <ListItem className={classes.item}button>
-                            <ListItemText primary={item} />
+            {store.map((item, id) => (
+                    <div key={id}>
+                        <p className={classes.user}>{item.user}</p>
+                        <ListItem className={classes.item}>
+                            <ListItemText primary={item.message} />
                        </ListItem>
                     </div>
                 ))
@@ -58,10 +65,10 @@ function Messages(){
       <Sent /> */}
       <List>
           {
-              ["what??", "okay"].map(item => (
-                  <div className={classes.recieved}>
-                      <p className={classes.user}> user</p>
-                      <ListItem className={classes.itemRecieved}button>
+              ["what??", "okay", "f", "f", "f","g","g","k", "l", "f"].map((item, id)=> (
+                  <div key={id} className={classes.recieved}>
+                      <p className={classes.user}>me</p>
+                      <ListItem className={classes.itemRecieved}>
                           <ListItemText primary={item} />
                      </ListItem>
                   </div>

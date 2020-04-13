@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
+import '../App.css';
+import {ctx} from '../store'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,18 +18,27 @@ const useStyles = makeStyles((theme) => ({
   },
   p:{
       fontSize: "12px",
+  },
+  header: {
+      textAlign: "center"
   }
 }));
 
 function Header(){
     const classes = useStyles();
 
+    const [store] = React.useContext(ctx);
+    console.log(store);
+
       return (
           <div>
-              <AppBar position="static">
+              <AppBar position="fixed" className={classes.header}>
                   <Toolbar>
                     <Typography variant="h6" className={classes.title}>
-                      <p className={classes.p}>Tim, Flo, John-Paul</p>
+                        {store.map(user => (
+                            <span>{user.user},      </span>
+                        ))}
+
                     </Typography>
                   </Toolbar>
               </AppBar>
