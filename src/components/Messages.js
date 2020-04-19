@@ -8,8 +8,9 @@ import InboxIcon from '@material-ui/icons/Inbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { connect } from 'react-redux'
-
 import '../App.css';
+import { sendThatMessage } from '../redux/messages/messagesActions';
+import { sendChatAction } from '../store';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Messages(props){
-    console.log(props.state);
+    console.log(props);
     
     const classes = useStyles();
     return (
@@ -85,4 +86,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Messages);
+const mapDispatchToProps = (dispatch) => {
+    return{
+        doIt: (message) => dispatch(sendChatAction(message))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Messages);

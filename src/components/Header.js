@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Header(props){
     const classes = useStyles();
-    console.log(props);
+
     
 
       return (
@@ -36,7 +36,8 @@ function Header(props){
               <AppBar position="fixed" className={classes.header}>
                   <Toolbar>
                     <Typography variant="h6" className={classes.title}>
-                      {props.state.map(item =>  <span>{item.user}</span>)}
+                      <span>hi</span>
+                      {/* {props.state.map(item =>  <span>{item.user}</span>)} */}
                            
                         
 
@@ -51,7 +52,6 @@ const mapStateToProps = (state) => {
   return{
     state: state
   }
-
 }
 
 export default connect(mapStateToProps)(Header);
