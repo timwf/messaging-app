@@ -1,38 +1,78 @@
 import React from 'react';
+import io from "socket.io-client"
 
 export const ctx = React.createContext();
-console.log(ctx.Provider);
+let initialState = [{user: "tim", message: "fuck"},{user: "tom", message: "off"},{user: "thm", message: "offfff"}]
 
 
-let initialState = [{user: "tim", message: "hi"}, {user: "tom", message: "what do you wanttt"}]
 
-function Store(props){
-    const reducerHook = React.useReducer(reducer, initialState);
-
-    return(
-        <ctx.Provider value={reducerHook}>
-            {props.children}
-        </ctx.Provider>
-    )
-
-}
 
 function reducer(state, action) {
-    const {user, message} = action.payload
+    // const {userR, message} = action.payload;
+    console.log(action.payload);
+
     switch (action.type) {
         case 'RECIEVE_MESSAGE' :
-        return{
-            ...state
-            // {user, message}
-        }
+            console.log("recieved in reducer");
+            console.log(action.payload.user);
+            console.log(action.payload.message);
+        return [
+             ...state, {user: action.payload.user, message: action.payload.message}
 
-            break;
+        ]
+        break;
         default:
-            return state
+        return{
+        state
+    }
+
+            // return state
 
     }
 }
 
 
 
-export default Store;
+let socket;
+
+
+// sends to server
+function sendChatAction(message){
+    socket.emit('chat message', message);
+}
+
+
+
+export default function Store(props){
+    const [reducerHook, dispatch] = React.useReducer(reducer, initialState);
+    console.log(reducerHook);
+
+    //recieves from server
+    if (!socket) {
+        socket = io(":3001");
+        socket.on('chat message', function(msg){
+            dispatch({type: 'RECIEVE_MESSAGE', payload: msg});
+
+    });
+};
+
+    const user = "tim" + Math.random(100).toFixed(2);
+
+
+    return(
+        <ctx.Provider value={{reducerHook, sendChatAction, user}}>
+        <button
+
+        onClick={() => {
+            dispatch({type: "RECIEVE_MESSAGE", payload: {user: "tttiiii", message: "workd"}})
+        }}
+
+      >.
+      </button>
+
+
+            {props.children}
+        </ctx.Provider>
+    )
+
+}

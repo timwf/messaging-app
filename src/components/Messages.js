@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Recieved from "./Recieved";
 import { makeStyles } from '@material-ui/core/styles';
 import Sent from "./Sent";
@@ -7,7 +7,8 @@ import ListItem from '@material-ui/core/ListItem';
 import InboxIcon from '@material-ui/icons/Inbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import {ctx} from '../store'
+import { connect } from 'react-redux'
+
 import '../App.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,16 +44,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Messages(){
+function Messages(props){
+    console.log(props.state);
+    
     const classes = useStyles();
-
-    const[store] = React.useContext(ctx);
-    console.log(store);
     return (
       <div className="messages-cont">
         <List>
-            {store.map((item, id) => (
-                    <div key={id}>
+       { props.state.map((item, id)=> (
+                  <div key={id}>
                         <p className={classes.user}>{item.user}</p>
                         <ListItem className={classes.item}>
                             <ListItemText primary={item.message} />
@@ -64,20 +64,25 @@ function Messages(){
       {/* <Recieved />
       <Sent /> */}
       <List>
-          {
-              ["what??", "okay", "f", "f", "f","g","g","k", "l", "f"].map((item, id)=> (
-                  <div key={id} className={classes.recieved}>
-                      <p className={classes.user}>me</p>
+          { props.state.map((item)=> (
+                  <div  className={classes.recieved}>
+                      <p className={classes.user}>{item.user}</p>
                       <ListItem className={classes.itemRecieved}>
-                          <ListItemText primary={item} />
+                          <ListItemText primary={item.message} />
                      </ListItem>
                   </div>
               ))
           }
-      </List>
+      </List>  
       </div>
     );
 
 }
 
-export default Messages;
+const mapStateToProps = (state) => {
+    return{
+        state: state
+    }
+}
+
+export default connect(mapStateToProps)(Messages);

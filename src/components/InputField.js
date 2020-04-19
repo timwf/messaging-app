@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
+
+
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -23,26 +25,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function InputField() {
-    const classes = useStyles();
+  const classes = useStyles()
 
-    const [messageValue, changeMessageValue] = useState("tim");
-
+    
     return (
         <div className={classes.input}>
-              <form>
+              <div>
                    <TextField
                        label="Write your message"
-                       value={messageValue}
-                        onChange={e => changeMessageValue(e.target.value)}
                     />
                    <Button
                    variant="contained"
                    color="primary"
                    className={classes.button}
                    endIcon={<Icon>send</Icon>}
-                 >
+                 >.
                  </Button>
-             </form>
+             </div>
         </div>
 
     );

@@ -3,8 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
-import '../App.css';
-import {ctx} from '../store'
+import '../App.css'
+import {connect} from 'react-redux'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,24 +21,24 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "12px",
   },
   header: {
-      textAlign: "center"
+      textAlign: "center",
+      width: "50%"
   }
 }));
 
-function Header(){
+function Header(props){
     const classes = useStyles();
-
-    const [store] = React.useContext(ctx);
-    console.log(store);
+    console.log(props);
+    
 
       return (
           <div>
               <AppBar position="fixed" className={classes.header}>
                   <Toolbar>
                     <Typography variant="h6" className={classes.title}>
-                        {store.map(user => (
-                            <span>{user.user},      </span>
-                        ))}
+                      {props.state.map(item =>  <span>{item.user}</span>)}
+                           
+                        
 
                     </Typography>
                   </Toolbar>
@@ -46,4 +47,11 @@ function Header(){
       );
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  return{
+    state: state
+  }
+
+}
+
+export default connect(mapStateToProps)(Header);
