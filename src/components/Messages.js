@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Recieved from "./Recieved";
 import { makeStyles } from '@material-ui/core/styles';
 import Sent from "./Sent";
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   item: {
       backgroundColor: "#ac7878",
       width: "fit-content",
-      margin: "0px 8px 0px 8px",
+   
       borderRadius: "5px"
   },
   user: {
@@ -40,45 +40,48 @@ const useStyles = makeStyles((theme) => ({
   itemRecieved: {
       backgroundColor: "#24c324",
       width: "fit-content",
-      margin: "0px 8px 0px 8px",
-      borderRadius: "5px"
+      borderRadius: "5px",
+      float: "right"
   },
 }));
 
 function Messages(props){
-    console.log(props.state.user);
     const initUser = props.state.user
     const classes = useStyles();
-    return (
-      <div className="messages-cont">
-        <List>
-       { props.state.messages.map((item, id)=> (
-                  <div key={id}>
-                        <p className={classes.user}>{initUser}</p>
-                        <ListItem className={classes.item}>
-                            <ListItemText primary={item} />
-                       </ListItem>
-                    </div>
-                ))
-            }
-        </List>
-      {/* <Recieved />
-      <Sent /> */}
-      {/* <List>
-          { props.state.map((item)=> (
-                  <div  className={classes.recieved}>
-                      <p className={classes.user}>{item.user}</p>
-                      <ListItem className={classes.itemRecieved}>
-                          <ListItemText primary={item.message} />
-                     </ListItem>
-                  </div>
-              ))
-          }
-      </List>   */}
-      </div>
-    );
 
-}
+
+    return (
+     
+                 props.state.messages.map((user) => user.user == props.state.user 
+                 ? 
+                 <div className="messages-cont">   
+                 <List>                         
+                    <ListItem className={classes.itemRecieved}>
+                          <ListItemText primary={user.message} />
+                        </ListItem>
+                                       
+                </List>
+                </div>  
+                  
+                            : 
+                            <div className="messages-cont">
+                <List>   
+                 <div>
+                 <p className={classes.user}>{user.user}</p>
+                                <ListItem className={classes.item}>
+                                
+                                    <ListItemText primary={user.message} />
+                                </ListItem>
+                                </div>
+                        
+                        </List>
+                </div>
+                            )
+          
+                    
+    
+    )
+    }
 
 const mapStateToProps = (state) => {
     return{
@@ -93,3 +96,16 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Messages);
+
+
+
+// return (
+//    
+// }
+// else{
+//     console.log("returend false");
+//     return (
+       
+
+
+// }

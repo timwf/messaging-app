@@ -47,7 +47,7 @@ function InputField(props) {
                    color="primary"
                    className={classes.button}
                    endIcon={<Icon>send</Icon>}
-                  onClick={() => sendChatAction(thisMessage)  }
+                  onClick={() => sendChatAction({message: thisMessage, user: newUserName}) }
                  >.
                  </Button>
                  <TextField
@@ -85,8 +85,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    updateUserName: (user) => dispatch(userName(user)),
-    doIt: (message) => dispatch(sendMessage(message))
+    updateUserName: (user) => dispatch(userName(user))
+
   }
 }
 
