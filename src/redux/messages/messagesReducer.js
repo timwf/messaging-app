@@ -1,39 +1,32 @@
-import { RECIEVED_MESSAGE, SEND_MESSAGE } from "./messagesTypes";
+import { RECIEVED_MESSAGE, SEND_MESSAGE, USER_NAME } from "./messagesTypes";
 
 
 
 
 
-const initialState = 
-    [
-        {
-        user: "testing123",
-        message: "fuck you"
-     },
-     {
-        user: "testing123",
-        message: "fuck you"
-     },
-     {
-        user: "testing123",
-        message: "fuck you"
-     }
+const initialState = {
+    user: "tim",
+    messages: ["hi", "how"]
 
-    ]
+}
+   
 
 
 export function messageReducer(state = initialState, action){
     switch (action.type) {
-        case RECIEVED_MESSAGE:
+        case SEND_MESSAGE: 
+        console.log(state);        
             return{
-                ...state
+                ...state, 
+                messages: [...state.messages, action.payload]
+             
             }
-        case SEND_MESSAGE:
- 
-            return[
+        case USER_NAME:
+            console.log(state);            
+            return{
                 ...state,
-                {user: 'tim', message: action.payload}
-            ]
+                user: action.payload
+            }
         default: 
         
         

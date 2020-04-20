@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
-import { sendMessage } from '../redux/messages/messagesActions';
+import { sendMessage, userName } from '../redux/messages/messagesActions';
 import { connect } from 'react-redux'
 import io from 'socket.io-client'
 
@@ -28,24 +28,39 @@ const useStyles = makeStyles((theme) => ({
 
 function InputField(props) {
   const classes = useStyles()  
-  const [thisMessage, changeThisMessage] = useState("")
 
-  const user = "user tim"
 
+  const [thisMessage, setThisMessage] = useState()
+  const [newUserName, setUserName] = useState()
+
+  
     return (     
         <div className={classes.input}>
               <div>
                    <TextField
                        label="Write your message"
                        value={thisMessage}
-                       onChange={(e) => changeThisMessage(e.target.value)}
+                       onChange={(e) => setThisMessage(e.target.value)}
                     />
                    <Button
                    variant="contained"
                    color="primary"
                    className={classes.button}
                    endIcon={<Icon>send</Icon>}
-                   onClick={() => sendChatAction(thisMessage)}
+                  onClick={() => sendChatAction(thisMessage)  }
+                 >.
+                 </Button>
+                 <TextField
+                       label="Write your username"
+                       value={thisMessage}
+                       onChange={(e) => setUserName(e.target.value)}
+                    />
+                   <Button
+                   variant="contained"
+                   color="primary"
+                   className={classes.button}
+                   endIcon={<Icon>send</Icon>}
+                  onClick={() => props.updateUserName(newUserName)}
                  >.
                  </Button>
              </div>
@@ -57,9 +72,8 @@ function InputField(props) {
 let socket = io(":3001")
 // sends to server
 
-function sendChatAction(message, user){
-  console.log("this is the mesaage" + message);    
-  socket.emit('chat message', message);
+function sendChatAction(message){
+   socket.emit('chat message', message);
 }
 
 
@@ -69,6 +83,13 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(InputField);
+const mapDispatchToProps = (dispatch) => {
+  return{
+    updateUserName: (user) => dispatch(userName(user)),
+    doIt: (message) => dispatch(sendMessage(message))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputField);
 
 

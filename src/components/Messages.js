@@ -46,16 +46,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Messages(props){
-
+    console.log(props.state.user);
+    const initUser = props.state.user
     const classes = useStyles();
     return (
       <div className="messages-cont">
         <List>
-       { props.state.map((item, id)=> (
+       { props.state.messages.map((item, id)=> (
                   <div key={id}>
-                        <p className={classes.user}>{item.user}</p>
+                        <p className={classes.user}>{initUser}</p>
                         <ListItem className={classes.item}>
-                            <ListItemText primary={item.message} />
+                            <ListItemText primary={item} />
                        </ListItem>
                     </div>
                 ))
