@@ -3,8 +3,9 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
-import { sendThatMessage } from '../redux/messages/messagesActions';
+import { sendMessage } from '../redux/messages/messagesActions';
 import { connect } from 'react-redux'
+import io from 'socket.io-client'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,11 +27,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function InputField(props) {
-  const classes = useStyles()
-
-  
+  const classes = useStyles()  
   const [thisMessage, changeThisMessage] = useState("")
-  console.log('this meassge' + thisMessage)
+
+  const user = "user tim"
+
     return (     
         <div className={classes.input}>
               <div>
@@ -44,13 +45,21 @@ function InputField(props) {
                    color="primary"
                    className={classes.button}
                    endIcon={<Icon>send</Icon>}
-                   onClick={() => props.doIt(thisMessage)}
+                   onClick={() => sendChatAction(thisMessage)}
                  >.
                  </Button>
              </div>
         </div>
 
     );
+}
+
+let socket = io(":3001")
+// sends to server
+
+function sendChatAction(message, user){
+  console.log("this is the mesaage" + message);    
+  socket.emit('chat message', message);
 }
 
 
@@ -60,13 +69,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return{
-      doIt: (message) => dispatch(sendThatMessage(message))
-      
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(InputField);
+export default connect(mapStateToProps)(InputField);
 
 

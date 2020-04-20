@@ -46,8 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Messages(props){
-    console.log(props);
-    
+
     const classes = useStyles();
     return (
       <div className="messages-cont">
@@ -64,7 +63,7 @@ function Messages(props){
         </List>
       {/* <Recieved />
       <Sent /> */}
-      <List>
+      {/* <List>
           { props.state.map((item)=> (
                   <div  className={classes.recieved}>
                       <p className={classes.user}>{item.user}</p>
@@ -74,7 +73,7 @@ function Messages(props){
                   </div>
               ))
           }
-      </List>  
+      </List>   */}
       </div>
     );
 
