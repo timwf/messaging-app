@@ -34,9 +34,7 @@ function Header(props){
     props.state.messages.map(user => {
         if (uniqueTags.indexOf(user.user) === -1) {
             uniqueTags.push(user.user)
-        }
-        console.log("not");
-        
+        }       
     });
 
     console.log(uniqueTags);
@@ -47,11 +45,10 @@ function Header(props){
               <AppBar position="fixed" className={classes.header}>
                   <Toolbar>
                     <Typography variant="h6" className={classes.title}>
+                      
      
-                    {uniqueTags.map(item =>  <span>{item} </span>)} 
-                           
-                        
-
+                    {/* {props.state.userNames.map(item => <span>{item} </span>)}  */}
+                    {uniqueTags.map(item => <span>{item} ᛫ </span>)} 
                     </Typography>
                   </Toolbar>
               </AppBar>

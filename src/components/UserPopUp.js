@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux'
 import { userName } from '../redux/messages/messagesActions';
+import io from 'socket.io-client'
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -33,6 +34,7 @@ function UserPopUp(props) {
     function userNameNeededFunc(){
         props.updateUserName(newUserName)
         setUserNameNeeded(false)
+        sendUserName(newUserName)
     }
     
 
@@ -54,9 +56,14 @@ function UserPopUp(props) {
             </Button>
         </div>     
     </div>
-    )        
-    
+    ) 
+}
 
+let socket = io(":3001")
+// sends to server
+
+function sendUserName(user){
+   socket.emit('update user', user);
 }
 
 const mapStateToProps = (state) => {

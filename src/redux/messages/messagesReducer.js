@@ -1,4 +1,4 @@
-import { RECIEVED_MESSAGE, SEND_MESSAGE, USER_NAME } from "./messagesTypes";
+import { RECIEVED_MESSAGE, SEND_MESSAGE, USER_NAME, USER_NAME_SOCKET } from "./messagesTypes";
 
 
 
@@ -25,8 +25,13 @@ export function messageReducer(state = initialState, action){
             console.log(state);            
             return{
                 ...state,
-                user: action.payload,
-                userNames: [...state.userNames, action.payload]
+                user: action.payload,  
+                      
+            }
+        case USER_NAME_SOCKET:
+            return{
+                ...state,
+                userNames: [state.userNames, action.payload]
             }
         default: 
         
