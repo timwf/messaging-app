@@ -5,9 +5,9 @@ import { RECIEVED_MESSAGE, SEND_MESSAGE, USER_NAME } from "./messagesTypes";
 
 
 const initialState = {
-    user: "tim",
-    messages: [{user: "default", message: "default message"}]
-
+    user: null,
+    messages: [],
+    userNames: []
 }
    
 
@@ -25,7 +25,8 @@ export function messageReducer(state = initialState, action){
             console.log(state);            
             return{
                 ...state,
-                user: action.payload
+                user: action.payload,
+                userNames: [...state.userNames, action.payload]
             }
         default: 
         

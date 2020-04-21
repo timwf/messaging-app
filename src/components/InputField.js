@@ -7,7 +7,6 @@ import { sendMessage, userName } from '../redux/messages/messagesActions';
 import { connect } from 'react-redux'
 import io from 'socket.io-client'
 
-
 const useStyles = makeStyles((theme) => ({
   button: {
     marginTop: "12px",
@@ -15,11 +14,11 @@ const useStyles = makeStyles((theme) => ({
     width: "13px"
   },
   input: {
-        width: "100%",
-          bottom: "0",
-          position: "fixed",
-          textAlign: "center",
-          backgroundColor: "grey",
+    width: "100%",
+    bottom: "0",
+    position: "fixed",
+    textAlign: "center",
+    backgroundColor: "grey",
           paddingBottom: "14px",
           paddingTop: "14px"
 
@@ -28,44 +27,24 @@ const useStyles = makeStyles((theme) => ({
 
 function InputField(props) {
   const classes = useStyles()  
-
-
-  const [thisMessage, setThisMessage] = useState()
-  const [newUserName, setUserName] = useState()
-
-  
+  const [thisMessage, setThisMessage] = useState()  
     return (     
-        <div className={classes.input}>
-              <div>
-                   <TextField
-                       label="Write your message"
-                       value={thisMessage}
-                       onChange={(e) => setThisMessage(e.target.value)}
-                    />
-                   <Button
-                   variant="contained"
-                   color="primary"
-                   className={classes.button}
-                   endIcon={<Icon>send</Icon>}
-                  onClick={() => sendChatAction({message: thisMessage, user: newUserName}) }
-                 >.
-                 </Button>
-                 <TextField
-                       label="Write your username"
-                       value={thisMessage}
-                       onChange={(e) => setUserName(e.target.value)}
-                    />
-                   <Button
-                   variant="contained"
-                   color="primary"
-                   className={classes.button}
-                   endIcon={<Icon>send</Icon>}
-                  onClick={() => props.updateUserName(newUserName)}
-                 >.
-                 </Button>
-             </div>
+      <div className={classes.input}>
+        <div>
+          <TextField
+            label="Write your message"
+            value={thisMessage}
+            onChange={(e) => setThisMessage(e.target.value)}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            onClick={() => sendChatAction({message: thisMessage, user: props.state.user}) }
+          >SEND
+          </Button>
         </div>
-
+      </div>
     );
 }
 
@@ -83,13 +62,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return{
-    updateUserName: (user) => dispatch(userName(user))
 
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(InputField);
+export default connect(mapStateToProps)(InputField);
 
 

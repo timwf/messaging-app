@@ -22,13 +22,24 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
       textAlign: "center",
-      width: "50%"
+
   }
 }));
 
 function Header(props){
     const classes = useStyles();
+    console.log(props.state.messages);
+    
+    const uniqueTags = [];
+    props.state.messages.map(user => {
+        if (uniqueTags.indexOf(user.user) === -1) {
+            uniqueTags.push(user.user)
+        }
+        console.log("not");
+        
+    });
 
+    console.log(uniqueTags);
     
 
       return (
@@ -36,8 +47,8 @@ function Header(props){
               <AppBar position="fixed" className={classes.header}>
                   <Toolbar>
                     <Typography variant="h6" className={classes.title}>
-                      <span>hi</span>
-                      {/* {props.state.map(item =>  <span>{item.user}</span>)} */}
+     
+                    {uniqueTags.map(item =>  <span>{item} </span>)} 
                            
                         
 

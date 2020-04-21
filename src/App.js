@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import { Provider} from 'react-redux'
 import store from './newStore'
+import UserPopUp from './components/UserPopUp';
 
 
 
@@ -20,6 +21,7 @@ function App() {
     <div className="App">
 
     <Provider store={store}>
+        <UserPopUp />
             <Header />
             <Messages />
             <InputField />

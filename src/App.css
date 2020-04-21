@@ -54,3 +54,74 @@ html, body, h1, h2{
     height:54px;
     min-height: 0px
 }
+
+.recieved-message-user{
+  margin: 0px 0px 0px 10px;
+  font-size: 10px;
+}
+
+.message-recieved-bubble{
+  background-color:   #69a359;
+
+  padding: 20px;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 10px;
+  margin: 0px 10px 7px 90px;
+}
+
+.sent-message-user{
+  margin: 0px 10px 0px 0px;
+  font-size: 10px;
+}
+
+.message-sent-bubble{
+  background-color: #765a9d;
+  padding: 20px;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 10px;
+  margin: 0px 90px 7px 10px;;
+}
+
+.sent-container{
+  display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.message-board{
+  margin-top: 57px;
+  height: 100%;
+  margin-bottom: 76px;
+ 
+}
+
+body {
+  background-color: #d5d5d5;
+}
+
+.pop-up-cont{
+  z-index: 99999999;
+  position: absolute;
+  background-color: #5d5954d9;
+  height: 100vh;
+  width: 100%;
+  top: -54px;
+}
+
+.pop-up-box{
+  background-color: lightyellow;
+  top: 35%;
+  position: absolute;
+  margin-left: -140px;
+  left: 50%;
+  width: 240px;
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.hidden{
+  display: none;
+}
