@@ -2,4 +2,5 @@ export const RECIEVED_MESSAGE = 'RECIEVED_MESSAGE'
 export const SEND_MESSAGE = 'SEND_MESSAGE'
 export const USER_NAME = 'USER_NAME'
 export const USER_NAME_SOCKET = 'USER_NAME_SOCKET'
+export const SOCKET_ID = 'SOCKET_ID'
 

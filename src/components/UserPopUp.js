@@ -29,7 +29,7 @@ function UserPopUp(props) {
     const classes = useStyles() 
     const [newUserName, setUserName] = useState()
     const [userNameNeeded, setUserNameNeeded] = useState(true)
-    console.log(userNameNeeded);
+
 
     function userNameNeededFunc(){
         props.updateUserName(newUserName)

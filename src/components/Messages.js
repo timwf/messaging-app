@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 function Messages(props){
     const initUser = props.state.user
     const classes = useStyles();
-    console.log(props.state.user);
+
     
     
     // window.scrollTo(0,(document.body.scrollHeight)+11150);

@@ -28,18 +28,9 @@ const useStyles = makeStyles((theme) => ({
 
 function Header(props){
     const classes = useStyles();
-    console.log(props.state.messages);
-    
-    // const uniqueTags = [];
-    // props.state.messages.map(user => {
-    //     if (uniqueTags.indexOf(user.user) === -1) {
-    //         uniqueTags.push(user.user)
-    //     }       
-    // });
 
     console.log(props.state.userNames);
- 
-    
+       
     
 
       return (
@@ -49,7 +40,7 @@ function Header(props){
                     <Typography variant="h6" className={classes.title}>
                       
      
-                    {props.state.userNames.map(item => <span>{item.userName}  ᛫ </span>)} 
+                    {props.state.userNames.map(item => <span>{item}  ᛫ </span>)} 
                     {/* {uniqueTags.map(item => <span>{item}</span>)}  */}
                     </Typography>
                   </Toolbar>

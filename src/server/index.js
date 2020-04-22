@@ -9,9 +9,9 @@ app.get('/', function(req, res){
 let username = []
 
 io.on('connection', function(socket){
-  console.log('a user connected');
-
-  
+  console.log('a user connected');  
+  let id = socket.id
+  io.emit('socket id on connection', id); 
 
   socket.on('chat message', function(msg){
     console.log('message: ' + JSON.stringify(msg));
@@ -19,15 +19,11 @@ io.on('connection', function(socket){
   });
 
   socket.on('update user', function(usr){
-    console.log('username: ' + JSON.stringify(usr));
-    console.log(socket.username);
-    let currentUser = {userName: usr, userId: Math.random()}
-    username.push(currentUser)
+    io.emit('new user emit', (usr))  
+    username.push({userName: usr, id: id}) 
     console.log(username);
-    io.emit('new user emit', (username))   
-     io.emit('user update', currentUser);
+    
   });
-
 });
 
 http.listen(3001, function(){

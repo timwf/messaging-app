@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function InputField(props) {
-  console.log(props.state.user.userName);
+
   
   const classes = useStyles()  
   const [thisMessage, setThisMessage] = useState()  
