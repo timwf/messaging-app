@@ -11,18 +11,20 @@ let username = []
 io.on('connection', function(socket){
   console.log('a user connected');  
   let id = socket.id
-  io.emit('socket id on connection', id); 
+ 
 
   socket.on('chat message', function(msg){
     console.log('message: ' + JSON.stringify(msg));
      io.emit('chat message', msg);
   });
 
-  socket.on('update user', function(usr){   
+  socket.on('update user', function(usr){  
+    io.emit('socket id on connection', id);  
     username.push({userName: usr, id: id}) 
     io.emit('new user emit', (username))  
     console.log(usr);
     console.log(username);
+   
     
     
    
