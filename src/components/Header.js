@@ -38,7 +38,7 @@ function Header(props){
     // });
 
     console.log(props.state.userNames);
-    props.state.userNames.map((item, index) => console.log(item.userName))
+ 
     
     
 

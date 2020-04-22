@@ -55,16 +55,16 @@ function Messages(props){
 
     return (
         <div className="message-board">
-                 {props.state.messages.map((user) => user.user == props.state.user 
+                 {props.state.messages.map((user) => user.user.userId == props.state.user.userId
                  ? 
                  <div className="sent-container">   
-                      {/* <p className="sent-message-user">{user.user}</p>
-                     <p className="message-recieved-bubble">{user.message}</p> */}
+                      <p className="sent-message-user">{user.user.userName}</p>
+                     <p className="message-recieved-bubble">{user.message}</p>
                  </div>                    
                 : 
                 <div  >                 
-                {/* <p className="recieved-message-user">{user.user}</p>
-                <p className="message-sent-bubble">{user.message}</p> */}
+                <p className="recieved-message-user">{user.user.userName}</p>
+                <p className="message-sent-bubble">{user.message}</p>
                 </div>  
          
                             )}

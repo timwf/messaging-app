@@ -19,13 +19,15 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     textAlign: "center",
     backgroundColor: "grey",
-          paddingBottom: "14px",
+     paddingBottom: "14px",
           paddingTop: "14px"
 
   },
 }));
 
 function InputField(props) {
+  console.log(props.state.user.userName);
+  
   const classes = useStyles()  
   const [thisMessage, setThisMessage] = useState()  
     return (     
