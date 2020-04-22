@@ -26,11 +26,10 @@ export function messageReducer(state = initialState, action){
                 user: {...state.user, userName: action.payload}  
                       
             }
-        case USER_NAME_SOCKET:
-    
+        case USER_NAME_SOCKET:   
             return{
                 ...state,
-                userNames: [...state.userNames, action.payload]
+                userNames:  action.payload.map(item => item.userName)
             }
         case SOCKET_ID:
             return{

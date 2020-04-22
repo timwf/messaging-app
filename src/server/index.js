@@ -18,10 +18,14 @@ io.on('connection', function(socket){
      io.emit('chat message', msg);
   });
 
-  socket.on('update user', function(usr){
-    io.emit('new user emit', (usr))  
+  socket.on('update user', function(usr){   
     username.push({userName: usr, id: id}) 
+    io.emit('new user emit', (username))  
+    console.log(usr);
     console.log(username);
+    
+    
+   
     
   });
 });
