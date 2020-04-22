@@ -6,29 +6,32 @@ app.get('/', function(req, res){
   res.send('<h1>Hello world</h1>');
 });
 
-let username = []
+let userNames = []
 
 io.on('connection', function(socket){
   console.log('a user connected');  
   let id = socket.id
  
 
-  socket.on('chat message', function(msg){
+  socket.on('send message', function(msg){
     console.log('message: ' + JSON.stringify(msg));
      io.emit('chat message', msg);
   });
 
-  socket.on('update user', function(usr){  
-    io.emit('socket id on connection', id);  
-    username.push({userName: usr, id: id}) 
-    io.emit('new user emit', (username))  
-    console.log(usr);
-    console.log(username);
-   
+  socket.on('send user', function(usr){ 
+    //current user updated 
+    io.emit('send user from server', usr)    
     
-    
-   
-    
+    userNames.push(usr) 
+
+    io.emit('all users array', userNames)
+
+    // io.emit('socket id on connection', id);  
+    // io.emit('this user name', usr)
+
+    // io.emit('new user emit', (username))  
+    // console.log(usr);
+    // console.log(username);   
   });
 });
 

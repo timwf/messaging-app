@@ -42,7 +42,7 @@ function InputField(props) {
             variant="contained"
             color="primary"
             className={classes.button}
-            onClick={() => sendChatAction({message: thisMessage, user: props.state.user}) }
+            onClick={() => sendTheMessage({message: thisMessage, user: props.state.user}) }
           >SEND
           </Button>
         </div>
@@ -53,8 +53,8 @@ function InputField(props) {
 let socket = io(":3001")
 // sends to server
 
-function sendChatAction(message){
-   socket.emit('chat message', message);
+function sendTheMessage(message){
+   socket.emit('send message', message);
 }
 
 

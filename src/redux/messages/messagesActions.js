@@ -1,4 +1,4 @@
-import { SEND_MESSAGE, RECIEVED_MESSAGE, USER_NAME, USER_NAME_SOCKET, SOCKET_ID} from './messagesTypes'
+import { SEND_MESSAGE, UPDATE_CURRENT_USER_NAME, UPDATE_ALL_USERS} from './messagesTypes'
 import io from 'socket.io-client'
 import  store  from '../../newStore'
 
@@ -9,45 +9,34 @@ export function sendMessage(sentMessage){
     }
 }
 
-export function userName(user){
+export function updateCurrentUserName(user){
     return{
-        type: USER_NAME,
+        type: UPDATE_CURRENT_USER_NAME,
         payload: user
     }
 }
 
-export function userNameSocket(user){
+export function updateAllUsers(arr){
     return{
-        type: USER_NAME_SOCKET,
-        payload: user
+        type: UPDATE_ALL_USERS,
+        payload: arr
     }
 }
 
-export function socketIdAction(socketId){
-    return{
-        type: SOCKET_ID,
-        payload: socketId
-    }
-}
+
+
+
 let socket = io(":3001")
-socket.on('chat message', function(msg){
+
+socket.on('send message', function(msg){
     store.dispatch(sendMessage(msg)); 
 });    
 
-socket.on('user update', function(usr){
-    store.dispatch(userName(usr))
-
-});   
-
-socket.on('new user emit', function(usr){
-    store.dispatch(userNameSocket(usr)); 
-});
-
-socket.on('socket id on connection', function(id){    
-    let socketId = id
-    store.dispatch(socketIdAction(socketId))
-    
+socket.on('send user from server', function(user){
+    store.dispatch(updateCurrentUserName(user))
 })
 
-
+socket.on('all users array', function(arr){
+    store.dispatch(updateAllUsers(arr))
+})
 

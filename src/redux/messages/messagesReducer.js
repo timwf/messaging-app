@@ -1,11 +1,11 @@
-import { RECIEVED_MESSAGE, SEND_MESSAGE, USER_NAME, USER_NAME_SOCKET, SOCKET_ID } from "./messagesTypes";
+import { SEND_MESSAGE, UPDATE_CURRENT_USER_NAME, UPDATE_ALL_USERS } from "./messagesTypes";
 
 
 
 
 
 const initialState = {
-    user: {},
+    currentUser: {},
     messages: [],
     userNames: []
 }
@@ -20,25 +20,18 @@ export function messageReducer(state = initialState, action){
                 messages: [...state.messages, action.payload]
              
             }
-        case USER_NAME:   
+        case UPDATE_CURRENT_USER_NAME:
             return{
                 ...state,
-                user: {...state.user, userName: action.payload}  
-                      
+                currentUser: {userName: action.payload}
             }
-        case USER_NAME_SOCKET:   
+        case UPDATE_ALL_USERS:
+            console.log(action.payload);
+            
             return{
                 ...state,
-                userNames:  action.payload.map(item => item.userName)
-            }
-        case SOCKET_ID:
-            if (!state.user.userName) {
-                return{
-                    ...state,
-                    user: {...state.user, userId: action.payload}
-                    }
-                                
-            }
+                userNames: action.payload
+                }
          
         
         default: 

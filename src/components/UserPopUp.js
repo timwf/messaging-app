@@ -7,23 +7,6 @@ import { connect } from 'react-redux'
 import { userName } from '../redux/messages/messagesActions';
 import io from 'socket.io-client'
 
-const useStyles = makeStyles((theme) => ({
-    button: {
-      marginTop: "12px",
-      marginLeft: "10px",
-      width: "13px"
-    },
-    input: {
-          width: "100%",
-            bottom: "0",
-            position: "fixed",
-            textAlign: "center",
-            backgroundColor: "grey",
-            paddingBottom: "14px",
-            paddingTop: "14px"
-  
-    },
-  }));
 
 function UserPopUp(props) {
     const classes = useStyles() 
@@ -32,9 +15,16 @@ function UserPopUp(props) {
 
 
     function userNameNeededFunc(){
-        props.updateUserName(newUserName)
-        setUserNameNeeded(false)
-        sendUserName(newUserName)
+      //gets rid of popoup
+      setUserNameNeeded(false)
+      //sends username to server 
+      sendUserName(newUserName)
+    }
+
+
+    let socket = io(":3001")
+    function sendUserName(user){
+      socket.emit('send user', user);
     }
     
 
@@ -59,12 +49,9 @@ function UserPopUp(props) {
     ) 
 }
 
-let socket = io(":3001")
-// sends to server
 
-function sendUserName(user){
-   socket.emit('update user', user);
-}
+
+
 
 const mapStateToProps = (state) => {
     return{
@@ -72,11 +59,24 @@ const mapStateToProps = (state) => {
     }
   }
 
-const mapDispatchToProps = (dispatch) => {
-    return{
-      updateUserName: (user) => dispatch(userName(user))
-  
-    }
-  }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserPopUp)
+  const useStyles = makeStyles((theme) => ({
+    button: {
+      marginTop: "12px",
+      marginLeft: "10px",
+      width: "13px"
+    },
+    input: {
+          width: "100%",
+            bottom: "0",
+            position: "fixed",
+            textAlign: "center",
+            backgroundColor: "grey",
+            paddingBottom: "14px",
+            paddingTop: "14px"
+  
+    },
+  }));
+
+
+export default connect(mapStateToProps)(UserPopUp)
