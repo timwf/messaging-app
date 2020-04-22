@@ -30,14 +30,16 @@ function Header(props){
     const classes = useStyles();
     console.log(props.state.messages);
     
-    const uniqueTags = [];
-    props.state.messages.map(user => {
-        if (uniqueTags.indexOf(user.user) === -1) {
-            uniqueTags.push(user.user)
-        }       
-    });
+    // const uniqueTags = [];
+    // props.state.messages.map(user => {
+    //     if (uniqueTags.indexOf(user.user) === -1) {
+    //         uniqueTags.push(user.user)
+    //     }       
+    // });
 
-    console.log(uniqueTags);
+    console.log(props.state.userNames);
+    props.state.userNames.map((item, index) => console.log(item.userName))
+    
     
 
       return (
@@ -47,8 +49,8 @@ function Header(props){
                     <Typography variant="h6" className={classes.title}>
                       
      
-                    {/* {props.state.userNames.map(item => <span>{item} </span>)}  */}
-                    {uniqueTags.map(item => <span>{item} ᛫ </span>)} 
+                    {props.state.userNames.map(item => <span>{item.userName}  ᛫ </span>)} 
+                    {/* {uniqueTags.map(item => <span>{item}</span>)}  */}
                     </Typography>
                   </Toolbar>
               </AppBar>

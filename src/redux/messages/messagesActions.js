@@ -9,13 +9,6 @@ export function sendMessage(sentMessage){
     }
 }
 
-export function recieveMessage(sentMessage){
-    return{
-        type: SEND_MESSAGE,
-        payload: sentMessage.message
-    }
-}
-
 export function userName(user){
     return{
         type: USER_NAME,
@@ -34,10 +27,14 @@ socket.on('chat message', function(msg){
     store.dispatch(sendMessage(msg)); 
 });    
 
-socket.on('user update', function(msg){
-   store.dispatch(userNameSocket(msg)); 
-   alert(msg + ' just joined')
-});    
+socket.on('user update', function(usr){
+    store.dispatch(userName(usr))
+
+});   
+
+socket.on('new user emit', function(usr){
+    store.dispatch(userNameSocket(usr)); 
+});
 
 
 

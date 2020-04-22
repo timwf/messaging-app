@@ -29,9 +29,11 @@ export function messageReducer(state = initialState, action){
                       
             }
         case USER_NAME_SOCKET:
+            console.log('action' + action.payload);
+            console.log('fucj you');          
             return{
                 ...state,
-                userNames: [state.userNames, action.payload]
+                userNames: action.payload
             }
         default: 
         

@@ -6,9 +6,11 @@ app.get('/', function(req, res){
   res.send('<h1>Hello world</h1>');
 });
 
+let username = []
+
 io.on('connection', function(socket){
   console.log('a user connected');
-  console.log(socket.id);
+
   
 
   socket.on('chat message', function(msg){
@@ -16,9 +18,14 @@ io.on('connection', function(socket){
      io.emit('chat message', msg);
   });
 
-  socket.on('update user', function(msg){
-    console.log('username: ' + JSON.stringify(msg));
-     io.emit('user update', msg);
+  socket.on('update user', function(usr){
+    console.log('username: ' + JSON.stringify(usr));
+    console.log(socket.username);
+    let currentUser = {userName: usr, userId: Math.random()}
+    username.push(currentUser)
+    console.log(username);
+    io.emit('new user emit', (username))   
+     io.emit('user update', currentUser);
   });
 
 });
