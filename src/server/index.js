@@ -19,21 +19,25 @@ io.on('connection', function(socket){
      io.emit('chat message', msg);
   });
 
-  socket.on('send user', function(usr){ 
-    //current user updated 
-      
+  socket.on('user for array', function(usr){ 
+    socket.userName = usr
+    console.log(socket.userName);
     
     userNames.push(usr) 
-
-    io.emit('all users array', userNames)
-
-    // io.emit('socket id on connection', id);  
-    // io.emit('this user name', usr)
-
-    // io.emit('new user emit', (username))  
-    // console.log(usr);
-    // console.log(username);   
+    console.log(userNames);
+    io.emit('all users array', userNames) 
   });
+
+socket.on('disconnect', function(){  
+  console.log(socket.userName + ' has left');
+  console.log('what? ' + JSON.stringify(socket.userName));
+  
+  userNames = userNames.filter(e => e !== socket.userName); // will return ['A', 'C']
+  io.emit('all users array', userNames) 
+  
+  
+})
+
 });
 
 http.listen(3001, function(){

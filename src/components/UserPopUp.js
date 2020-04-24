@@ -35,6 +35,7 @@ function UserPopUp(props) {
     function userNameNeededFunc(){
       if (userNameNeeded){
       finalIdAndUser = {...finalIdAndUser, userName: newUserName}
+      socket.emit('user for array', newUserName);
       setUserNameNeeded(false)  
       } 
     }
