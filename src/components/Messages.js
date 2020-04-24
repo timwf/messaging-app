@@ -46,24 +46,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Messages(props){
-    const initUser = props.state.user
-    const classes = useStyles();
 
+    console.log(props);
     
+    
+   
     
     // window.scrollTo(0,(document.body.scrollHeight)+11150);
 
     return (
         <div className="message-board">
-                 {props.state.messages.map((user) => user.user.userId == props.state.user.userId
+                 {props.state.messages.map((user) => props.userName.id == user.id
                  ? 
                  <div className="sent-container">   
-                      <p className="sent-message-user">{user.user.userName}</p>
+                      <p className="sent-message-user">{user.user}</p>
                      <p className="message-recieved-bubble">{user.message}</p>
                  </div>                    
                 : 
                 <div  >                 
-                <p className="recieved-message-user">{user.user.userName}</p>
+                <p className="recieved-message-user">{user.user}</p>
                 <p className="message-sent-bubble">{user.message}</p>
                 </div>  
          
@@ -76,7 +77,8 @@ function Messages(props){
 
 const mapStateToProps = (state) => {
     return{
-        state: state
+        state: state,
+     
     }
 }
 

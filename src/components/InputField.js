@@ -27,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
 
 function InputField(props) {
 
+ 
+  
   
   const classes = useStyles()  
   const [thisMessage, setThisMessage] = useState()  
@@ -42,7 +44,7 @@ function InputField(props) {
             variant="contained"
             color="primary"
             className={classes.button}
-            onClick={() => sendTheMessage({message: thisMessage, user: props.state.user}) }
+            onClick={() => sendTheMessage({message: thisMessage, user: props.userName.userName, id: props.userName.id}) }
           >SEND
           </Button>
         </div>

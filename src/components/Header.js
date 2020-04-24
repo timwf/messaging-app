@@ -37,9 +37,7 @@ function Header(props){
           <div>
               <AppBar position="fixed" className={classes.header}>
                   <Toolbar>
-                    <Typography variant="h6" className={classes.title}>
-                      
-     
+                    <Typography variant="h6" className={classes.title}>    
                     {props.state.userNames.map(item => <span>{item}  ᛫ </span>)} 
                     {/* {uniqueTags.map(item => <span>{item}</span>)}  */}
                     </Typography>

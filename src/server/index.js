@@ -11,6 +11,7 @@ let userNames = []
 io.on('connection', function(socket){
   console.log('a user connected');  
   let id = socket.id
+  io.emit('send user from server', (id))
  
 
   socket.on('send message', function(msg){
@@ -20,7 +21,7 @@ io.on('connection', function(socket){
 
   socket.on('send user', function(usr){ 
     //current user updated 
-    io.emit('send user from server', usr)    
+      
     
     userNames.push(usr) 
 

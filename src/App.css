@@ -63,7 +63,7 @@ html, body, h1, h2{
 .message-recieved-bubble{
   background-color:   #69a359;
 
-  padding: 20px;
+  padding: 10px;
   width: -moz-fit-content;
   width: fit-content;
   border-radius: 10px;
@@ -77,7 +77,7 @@ html, body, h1, h2{
 
 .message-sent-bubble{
   background-color: #765a9d;
-  padding: 20px;
+  padding: 10px;
   width: -moz-fit-content;
   width: fit-content;
   border-radius: 10px;

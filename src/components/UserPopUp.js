@@ -3,61 +3,81 @@ import '../App.css';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { connect } from 'react-redux'
-import { userName } from '../redux/messages/messagesActions';
 import io from 'socket.io-client'
+import store from '../newStore'
+import { Provider} from 'react-redux'
+import Header  from './Header'
+import InputField  from './InputField'
+import Messages from './Messages'
+
+let finalIdAndUser = {}
+let updateUserId = true
+
+let socket = io(":3001")
+
+socket.on('send user from server', function(id){
+  if (updateUserId){
+    alert(id)
+    finalIdAndUser = {id: id}
+    updateUserId = false
+    }
+  })
+
+  
 
 
 function UserPopUp(props) {
-    const classes = useStyles() 
+     const classes = useStyles() 
     const [newUserName, setUserName] = useState()
     const [userNameNeeded, setUserNameNeeded] = useState(true)
-
+ 
 
     function userNameNeededFunc(){
-      //gets rid of popoup
-      setUserNameNeeded(false)
-      //sends username to server 
-      sendUserName(newUserName)
+      if (userNameNeeded){
+      finalIdAndUser = {...finalIdAndUser, userName: newUserName}
+      setUserNameNeeded(false)  
+      } 
     }
 
+   
+   
+ 
 
-    let socket = io(":3001")
-    function sendUserName(user){
-      socket.emit('send user', user);
-    }
-    
+  
 
+    if (userNameNeeded){
+      
     return(
-        <div className={userNameNeeded ? "pop-up-cont" : 'hidden'}>
-        <div className="pop-up-box">
-            <p>Enter Your User Name</p>
-            <TextField
-                label="Write your username"
-                value={newUserName}
-                onChange={(e) => setUserName(e.target.value)}
-            />
-            <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}                  
-                onClick={userNameNeededFunc}
-            >Send
-            </Button>
-        </div>     
-    </div>
-    ) 
-}
-
-
-
-
-
-const mapStateToProps = (state) => {
-    return{
-        state: state
+          <div className="pop-up-cont">
+          <div className="pop-up-box">
+              <p>Enter Your User Name</p>
+              <TextField
+                  label="Write your username"
+                  value={newUserName}
+                  onChange={(e) => setUserName(e.target.value)}
+              />
+              <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}                  
+                  onClick={userNameNeededFunc}
+              >Send
+              </Button>
+          </div>     
+      </div>
+      ) 
     }
-  }
+    else{
+   
+      return(
+        <Provider store={store}>   
+            <Header />
+            <Messages userName={finalIdAndUser}/>
+            <InputField userName={finalIdAndUser}/>
+     </Provider>
+      )
+      }
+    }
 
 
   const useStyles = makeStyles((theme) => ({
@@ -79,4 +99,4 @@ const mapStateToProps = (state) => {
   }));
 
 
-export default connect(mapStateToProps)(UserPopUp)
+export default UserPopUp

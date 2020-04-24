@@ -1,4 +1,4 @@
-import { SEND_MESSAGE, UPDATE_CURRENT_USER_NAME, UPDATE_ALL_USERS} from './messagesTypes'
+import { SEND_MESSAGE, UPDATE_CURRENT_USER_NAME, UPDATE_ALL_USERS, UPDATE_MESSAGES} from './messagesTypes'
 import io from 'socket.io-client'
 import  store  from '../../newStore'
 
@@ -23,6 +23,13 @@ export function updateAllUsers(arr){
     }
 }
 
+export function updateMessages(msg){
+    return{
+        type: UPDATE_MESSAGES,
+        payload: msg
+    }
+}
+
 
 
 
@@ -32,11 +39,13 @@ socket.on('send message', function(msg){
     store.dispatch(sendMessage(msg)); 
 });    
 
-socket.on('send user from server', function(user){
-    store.dispatch(updateCurrentUserName(user))
-})
+
 
 socket.on('all users array', function(arr){
     store.dispatch(updateAllUsers(arr))
+})
+
+socket.on('chat message', function(msg){
+    store.dispatch(updateMessages(msg))
 })
 
