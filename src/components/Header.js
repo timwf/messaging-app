@@ -28,17 +28,15 @@ const useStyles = makeStyles((theme) => ({
 
 function Header(props){
     const classes = useStyles();
-
-    console.log(props.state.userNames);
-       
-    
+  
 
       return (
           <div>
               <AppBar position="fixed" className={classes.header}>
                   <Toolbar>
-                    <Typography variant="h6" className={classes.title}>    
-                    {props.state.userNames.map(item => <span>{item}  ᛫ </span>)} 
+                    <Typography variant="h6" className={classes.title}>   
+                     
+      {props.state.userNames.map((item, index) => <span>{index ? ', ':""}{item}</span>)} 
                     {/* {uniqueTags.map(item => <span>{item}</span>)}  */}
                     </Typography>
                   </Toolbar>
