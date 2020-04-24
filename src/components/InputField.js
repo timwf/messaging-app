@@ -25,13 +25,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function InputField(props) {
-
- 
+function InputField(props) { 
+  
   
   
   const classes = useStyles()  
-  const [thisMessage, setThisMessage] = useState()  
+  const [thisMessage, setThisMessage] = useState("")  
+
+  function sendTheMessage(message){
+    if (message.message.length > 1){
+     socket.emit('send message', message);
+     setThisMessage("")
+    }
+    else{
+      alert('write something then!')
+    }
+  }
+
     return (     
       <div className={classes.input}>
         <div>
@@ -55,9 +65,7 @@ function InputField(props) {
 let socket = io(":3001")
 // sends to server
 
-function sendTheMessage(message){
-   socket.emit('send message', message);
-}
+
 
 
 const mapStateToProps = (state) => {
