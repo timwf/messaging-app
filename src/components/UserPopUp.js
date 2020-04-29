@@ -17,7 +17,6 @@ let socket = io(":3001")
 
 socket.on('send user from server', function(id){
   if (updateUserId){
-    alert(id)
     finalIdAndUser = {id: id}
     updateUserId = false
     }
@@ -32,7 +31,21 @@ function UserPopUp(props) {
     const [userNameNeeded, setUserNameNeeded] = useState(true)
  
 
+  
     function userNameNeededFunc(){
+      let userNamesArray = store.getState().userNames
+      console.log(store.getState());
+      
+  
+
+      let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index)
+       
+      if(newUserName == (store.getState().userNames.map(item => item))){
+        console.log('user already used');
+        
+      }
+      
+      
       if (userNameNeeded){
       finalIdAndUser = {...finalIdAndUser, userName: newUserName}
       socket.emit('user for array', newUserName);

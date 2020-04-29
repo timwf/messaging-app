@@ -45,6 +45,7 @@ function InputField(props) {
     return (     
       <div className={classes.input}>
         <div>
+          
           <TextField
             label="Write your message"
             value={thisMessage}
@@ -56,7 +57,8 @@ function InputField(props) {
             className={classes.button}
             onClick={() => sendTheMessage({message: thisMessage, user: props.userName.userName, id: props.userName.id}) }
           >SEND
-          </Button>
+          </Button >
+     
         </div>
       </div>
     );

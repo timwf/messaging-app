@@ -1,8 +1,10 @@
 {
-  "homepage": "https://timwf.github.io/message-app-demo/",
   "name": "messaging-app",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "12.13.0"
+  },
   "dependencies": {
     "@material-ui/core": "^4.9.9",
     "@material-ui/icons": "^4.9.1",
@@ -22,8 +24,6 @@
     "thunk": "0.0.1"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
