@@ -21,6 +21,11 @@ io.on('connection', function(socket){
      io.emit('chat message', msg);
   });
 
+  socket.on('user is typing', function(usr){
+    console.log(usr);
+    io.emit('user is typing server', usr)
+  })
+
   socket.on('user for array', function(usr){ 
     socket.userName = usr
    userNames.push(usr) 
@@ -29,8 +34,7 @@ io.on('connection', function(socket){
 
 socket.on('disconnect', function(){  
  userNames = userNames.filter(e => e !== socket.userName); // will return ['A', 'C']
-  io.emit('all users array', userNames) 
-  
+  io.emit('all users array', userNames)  
   
 })
 

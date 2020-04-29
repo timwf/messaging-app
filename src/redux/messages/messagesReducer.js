@@ -1,17 +1,17 @@
-import {  UPDATE_ALL_USERS, UPDATE_MESSAGES } from "./messagesTypes";
+import {  UPDATE_ALL_USERS, UPDATE_MESSAGES,USER_IS_TYPING } from "./messagesTypes";
 
 
 const initialState = {
     messages: [],
-    userNames: []
+    userNames: [],
+    userIsTyping: {typing: false, user: ""}
 } 
 
 
 export function messageReducer(state = initialState, action){
     switch (action.type) {
         case UPDATE_ALL_USERS:
-            console.log(action.payload);
-            
+            console.log(action.payload);            
             return{
                 ...state,
                 userNames: action.payload
@@ -20,10 +20,14 @@ export function messageReducer(state = initialState, action){
             return{
                 ...state,
                 messages: [...state.messages, action.payload]
-            }     
-        default: 
-        
-        
-        return state
+            }  
+        case USER_IS_TYPING:
+            console.log('gett');
+            
+            return{
+                ...state,
+                userIsTyping: {typing: true, user: action.payload}
+            }  
+        default: return state
     }
 }

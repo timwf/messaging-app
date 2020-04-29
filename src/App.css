@@ -3,11 +3,13 @@ html, body, h1, h2{
     padding: 0;
 }
 
+*:focus {outline: none;}
+
 .App {
     position: relative;
   margin: auto;
   font-family: Roboto;
-  background-color: #d5d5d5;
+  background-color: #d9d9d9;
 
 }
 
@@ -55,6 +57,31 @@ html, body, h1, h2{
     min-height: 0px
 }
 
+
+.header{
+  height: 50px;
+   position: fixed;
+  width: 100%;
+  top: 0;
+  text-align: center;
+  display: flex;
+  background-color: #564686;
+  justify-content: center;
+  box-shadow: 0 -9px 26px 0px;
+  flex-wrap: wrap;
+}
+
+.header-users{
+  color: white;
+  font-size: 14px;
+  /* letter-spacing: 0.1em; */
+  padding: 0px;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-weight: 100;
+  letter-spacing: 1px;
+
+}
 .recieved-message-user{
   margin: 0px 0px 0px 10px;
   font-size: 10px;
@@ -76,7 +103,7 @@ html, body, h1, h2{
 }
 
 .message-sent-bubble{
-  background-color: #765a9d;
+  background-color: #dda9bb;
   padding: 10px;
   width: -moz-fit-content;
   width: fit-content;
@@ -91,14 +118,14 @@ html, body, h1, h2{
 }
 
 .message-board{
-  margin-top: 57px;
+  margin-top: 50px;
   height: 100%;
-  margin-bottom: 76px;
+  margin-bottom: 100px;
  
 }
 
 body {
-  background-color: #d5d5d5;
+  background-color: #d9d9d9;
 }
 
 .pop-up-cont{
@@ -107,7 +134,7 @@ body {
   background-color: #5d5954d9;
   height: 100vh;
   width: 100%;
-  top: -54px;
+
 }
 
 .pop-up-box{
@@ -124,4 +151,36 @@ body {
 
 .hidden{
   display: none;
+}
+
+.message-input-cont{
+  position: fixed;
+  bottom: 0;
+  background-color: #d9d9d9;
+  height: 38px;
+  padding-top: 6px;
+  width: 100%;
+  /* display: flex; */
+  text-align: center;
+}
+
+.message-input{
+  width: 94%;
+  /* padding: 5px; */
+  /* height: 100%; */
+  border-radius: 26px;
+  border: none;
+  height: 21px;
+  padding: 6px;
+  margin: auto;
+  box-shadow: #0000000a 0px 0px 12px;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
+  -webkit-tap-highlight-color: transparent;
+}
+
+.user-is-typing{
+  position: absolute;
+    top: -35px;
+    width: 100%;
+    text-align: center;
 }

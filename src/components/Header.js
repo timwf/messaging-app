@@ -31,16 +31,12 @@ function Header(props){
   
 
       return (
-          <div>
-              <AppBar position="fixed" className={classes.header}>
-                  <Toolbar>
-                    <Typography variant="h6" className={classes.title}>   
+          <div className="header">
+
                      
-      {props.state.userNames.map((item, index) => <span>{index ? ', ':""}{item}</span>)} 
+      {props.state.userNames.map((item, index) => <p className="header-users">{index ? ', ':""}{item}</p>)} 
                     {/* {uniqueTags.map(item => <span>{item}</span>)}  */}
-                    </Typography>
-                  </Toolbar>
-              </AppBar>
+
           </div>
       );
 }

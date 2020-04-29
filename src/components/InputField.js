@@ -25,40 +25,60 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function InputField(props) { 
-  
-  
-  
-  const classes = useStyles()  
-  const [thisMessage, setThisMessage] = useState("")  
+let userTyping = ""
 
-  function sendTheMessage(message){
-    if (message.message.length > 1){
-     socket.emit('send message', message);
+function InputField(props) {   
+  const classes = useStyles()  
+  const [thisMessage, setThisMessage] = useState("") 
+  const [userIsTypingState, setUserIsTypingState] = useState(false)
+  
+
+  socket.on('user is typing server', function(usr){
+    setUserIsTypingState(true)
+    userTyping = usr;
+    console.log(userTyping);    
+    setTimeout(function() { setUserIsTypingState(false); }, 2000);  
+} )
+  
+
+  function userIsTyping(e){
+    console.log(thisMessage);    
+    setThisMessage(e.target.value);
+    if(!userIsTypingState){
+      socket.emit('user is typing', props.userName.userName) 
+    }       
+  }
+   console.log(userTyping);
+   
+
+  function sendTheMessage(e, message){
+    console.log(thisMessage);
+    e.preventDefault()
+    if (message.message.length >= 1){
+      socket.emit('send message', message);
      setThisMessage("")
     }
     else{
       alert('write something then!')
     }
   }
+    console.log(userIsTypingState);
+    
 
     return (     
-      <div className={classes.input}>
+
+      <div className="message-input-cont">
+        {userIsTypingState ? <p className="user-is-typing">{userTyping} is typing...</p>: <p className="user-is-typing"></p>}
         <div>
-          
-          <TextField
+          <form onSubmit={(e) => sendTheMessage(e, {message: thisMessage, user: props.userName.userName, id: props.userName.id})}>
+          <input
+          className="message-input"
+          type="text-area"
             label="Write your message"
             value={thisMessage}
-            onChange={(e) => setThisMessage(e.target.value)}
+            onChange={(e) => userIsTyping(e)}
           />
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            onClick={() => sendTheMessage({message: thisMessage, user: props.userName.userName, id: props.userName.id}) }
-          >SEND
-          </Button >
-     
+          </form>
         </div>
       </div>
     );
