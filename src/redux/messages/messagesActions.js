@@ -1,4 +1,4 @@
-import { SEND_MESSAGE, UPDATE_CURRENT_USER_NAME, UPDATE_ALL_USERS, UPDATE_MESSAGES, USER_IS_TYPING} from './messagesTypes'
+import { SEND_MESSAGE, UPDATE_CURRENT_USER_NAME, UPDATE_ALL_USERS, UPDATE_MESSAGES} from './messagesTypes'
 import io from 'socket.io-client'
 import  store  from '../../newStore'
 
@@ -30,14 +30,7 @@ export function updateMessages(msg){
     }
 }
 
-export function userIsTyping(usr){
-    console.log('faf');
-    
-    return{
-        type: USER_IS_TYPING,
-        payload: usr
-    }
-}
+
 
 
 
@@ -45,6 +38,9 @@ export function userIsTyping(usr){
 let socket = io(":3001")
 
 socket.on('send message', function(msg){
+    console.log('message recieved');
+    
+    
     store.dispatch(sendMessage(msg)); 
 });    
 
@@ -55,13 +51,10 @@ socket.on('all users array', function(arr){
 })
 
 socket.on('chat message', function(msg){
-      
+      console.log('message recieved');
+      console.log(msg);
     store.dispatch(updateMessages(msg))
 })
 
-socket.on('user is typing server', function(usr){
-    console.log("szdhsrtnj");
-    
-    store.dispatch(userIsTyping(usr))
-} )
+
 

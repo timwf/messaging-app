@@ -1,74 +1,64 @@
-import React, {useState} from 'react';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Icon from '@material-ui/core/Icon';
-import { sendMessage, userName } from '../redux/messages/messagesActions';
+import React, {useState, useEffect} from 'react';
+import {  } from '../redux/messages/messagesActions';
 import { connect } from 'react-redux'
 import io from 'socket.io-client'
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    marginTop: "12px",
-    marginLeft: "10px",
-    width: "13px"
-  },
-  input: {
-    width: "100%",
-    bottom: "0",
-    position: "fixed",
-    textAlign: "center",
-    backgroundColor: "grey",
-     paddingBottom: "14px",
-          paddingTop: "14px"
 
-  },
-}));
 
-let userTyping = ""
+let userTyping = "someone"
 
 function InputField(props) {   
-  const classes = useStyles()  
   const [thisMessage, setThisMessage] = useState("") 
   const [userIsTypingState, setUserIsTypingState] = useState(false)
   
-
+useEffect(() => {  
   socket.on('user is typing server', function(usr){
     setUserIsTypingState(true)
     userTyping = usr;
-    console.log(userTyping);    
     setTimeout(function() { setUserIsTypingState(false); }, 2000);  
 } )
+
+}, [])
+
+
+
+
   
 
   function userIsTyping(e){
-    console.log(thisMessage);    
     setThisMessage(e.target.value);
-    if(!userIsTypingState){
+   
+    if(!userIsTypingState  || userTyping != props.userName.userName){
+    
       socket.emit('user is typing', props.userName.userName) 
     }       
   }
-   console.log(userTyping);
+ 
    
+  let swears = ["fuck", "shit", "bollocks", "cunt", "wanker", "fucking", "dick", "wank", "piss"];
 
   function sendTheMessage(e, message){
-    console.log(thisMessage);
     e.preventDefault()
     if (message.message.length >= 1){
       socket.emit('send message', message);
-     setThisMessage("")
+     setThisMessage("");
+     swears.map(swear => {
+      if (message.message.toLowerCase().includes(swear)){
+        alert("NAUGHTY!! you said " + swear)
+      }       
+     })
     }
     else{
-      alert('write something then!')
+      return
     }
   }
-    console.log(userIsTypingState);
+  
     
 
     return (     
 
       <div className="message-input-cont">
-        {userIsTypingState ? <p className="user-is-typing">{userTyping} is typing...</p>: <p className="user-is-typing"></p>}
+        {userIsTypingState && (userTyping != props.userName.userName) ? <p className="user-is-typing">{userTyping} is typing...</p>: <p className="user-is-typing"></p>}
         <div>
           <form onSubmit={(e) => sendTheMessage(e, {message: thisMessage, user: props.userName.userName, id: props.userName.id})}>
           <input

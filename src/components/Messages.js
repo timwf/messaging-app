@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import '../App.css';
 import { sendChatAction } from '../store';
@@ -17,17 +17,15 @@ function Messages(props){
     
     return (      
         <div className="message-board">
-             {props.state.userNames.length == 1 ? 
+             {props.state.userNames.length === 1 ? 
                   <div  >                 
                   <p className="recieved-message-user">Admin</p>
-                  <p className="message-sent-bubble">Hi {props.userName.userName}.  You are the only one here! You can talk to yourself but it might not be much fun... invite a friend to join - share they this link: https//ww.timiscool.com </p>
+                  <p className="message-sent-bubble">Hi {props.userName.userName} <span role="img">🙏</span>.  You are the only one here! <span role="img">😬</span> You can talk to yourself but it might not be much fun... invite a friend to join - share this link: <a href="" role="img">https//ww.timiscool.com</a> <br/> <br/><i>This app has been created with <span>💘</span> by <a href="https://github.com/timwf">Timothy Williams Fowler</a></i></p>
                   </div>  
              : <p></p>}
                  {props.state.messages.map((user) => props.userName.id == user.id
-                 ? 
-                 
-                 <div className="sent-container">   
-                
+                 ?                  
+                 <div className="sent-container">                   
                       <p className="sent-message-user">{user.user}</p>
                      <p className="message-recieved-bubble">{user.message}</p>
                  </div>                    

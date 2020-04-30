@@ -22,29 +22,28 @@ socket.on('send user from server', function(id){
     }
   })
 
-  
-
 
 function UserPopUp(props) {
      const classes = useStyles() 
-    const [newUserName, setUserName] = useState()
+    const [newUserName, setUserName] = useState("")
     const [userNameNeeded, setUserNameNeeded] = useState(true)
  
 
   
     function userNameNeededFunc(){
-      let userNamesArray = store.getState().userNames
-      console.log(store.getState());
-      
-  
+        if (store.getState().userNames.includes(newUserName)){
+        alert('That user name has been taken!'); 
+        return           
+      }  
 
-      let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index)
-       
-      if(newUserName == (store.getState().userNames.map(item => item))){
-        console.log('user already used');
-        
+      if (newUserName.length > 12){
+        alert("User name needs to be under 12 characters")
+        return
       }
-      
+
+      if (newUserName.length < 1){
+        return
+      }
       
       if (userNameNeeded){
       finalIdAndUser = {...finalIdAndUser, userName: newUserName}
@@ -52,11 +51,6 @@ function UserPopUp(props) {
       setUserNameNeeded(false)  
       } 
     }
-
-   
-   
- 
-
   
 
     if (userNameNeeded){
@@ -66,7 +60,7 @@ function UserPopUp(props) {
           <div className="pop-up-box">
               <p>Enter Your User Name</p>
               <TextField
-                  label="Write your username"
+                  label="Choose a username"
                   value={newUserName}
                   onChange={(e) => setUserName(e.target.value)}
               />
@@ -75,7 +69,7 @@ function UserPopUp(props) {
                   color="primary"
                   className={classes.button}                  
                   onClick={userNameNeededFunc}
-              >Send
+              >Go!
               </Button>
           </div>     
       </div>
