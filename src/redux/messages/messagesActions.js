@@ -35,7 +35,7 @@ export function updateMessages(msg){
 
 
 
-let socket = io(":3001")
+let socket = io("/")
 
 socket.on('send message', function(msg){
     console.log('message recieved');
