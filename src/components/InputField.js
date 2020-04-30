@@ -74,7 +74,7 @@ useEffect(() => {
     );
 }
 
-let socket = io("/")
+let socket = io(":3001")
 // sends to server
 
 

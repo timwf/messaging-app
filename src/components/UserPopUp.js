@@ -13,7 +13,7 @@ import Messages from './Messages'
 let finalIdAndUser = {}
 let updateUserId = true
 
-let socket = io("/")
+let socket = io(":3001")
 
 socket.on('send user from server', function(id){
   if (updateUserId){
