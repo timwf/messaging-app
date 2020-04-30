@@ -20,7 +20,7 @@ function Messages(props){
              {props.state.userNames.length === 1 ? 
                   <div  >                 
                   <p className="recieved-message-user">Admin</p>
-                  <p className="message-sent-bubble">Hi {props.userName.userName} <span role="img">🙏</span>.  You are the only one here! <span role="img">😬</span> You can talk to yourself but it might not be much fun... invite a friend to join - share this <a href="https://tim-fowler-message.herokuapp.com/" role="img">link</a>https://tim-fowler-message.herokuapp.com/<br/> <br/><i>This app has been created with <span>💘</span> by <a href="https://github.com/timwf">Timothy Williams Fowler</a></i></p>
+                  <p className="message-sent-bubble">Hi {props.userName.userName} <span role="img">🙏</span>.  You are the only one here! <span role="img">😬</span> You can talk to yourself but it might not be much fun... invite a friend to join - share this <a href="https://tim-fowler-message.herokuapp.com/" role="img"></a>https://tim-fowler-message.herokuapp.com/<br/> <br/><i>This app has been created with <span>💘</span> by <a href="https://github.com/timwf">Timothy Williams Fowler</a></i></p>
                   </div>  
              : <p></p>}
                  {props.state.messages.map((user) => props.userName.id == user.id
